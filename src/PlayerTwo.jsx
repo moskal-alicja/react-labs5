@@ -23,7 +23,7 @@ class PlayerTwo extends React.Component {
             <div className="player" style={{borderWidth: 1, borderStyle: 'Solid', margin: 5}}>
                 <b>Player Two</b>
                 <div>Name: {this.props.name}</div>
-                <div>Played number of times: </div>
+                <div>Played number of times: {this.props.playedTimes}</div>
                 <button disabled={this.props.active != 2} onClick={(event) => this.props.buttonHandler(event, 2)}>{this.setTextForButton()}</button>
             </div>
         );

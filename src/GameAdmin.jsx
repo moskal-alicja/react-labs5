@@ -10,6 +10,8 @@ class GameAdmin extends React.Component {
             playerOneName: "one", 
             playerTwoName: "two",
             activePlayer: 1,
+            playedTimesOne: 0,
+            playedTimesTwo: 0,
         }
         this.nameChanged = this.nameChanged.bind(this);
         this.playerClicked = this.playerClicked.bind(this);
@@ -29,14 +31,16 @@ class GameAdmin extends React.Component {
 
     playerClicked = (event, player) => {
         if(player == 1) {
-            this.setState({
-                activePlayer: 2,           
-            })
+            this.setState((prevState, props) => ({
+                activePlayer: 2, 
+                playedTimesOne: prevState.playedTimesOne + 1          
+            }));
         }
         else {
-            this.setState({
-                activePlayer: 1,           
-            })
+            this.setState((prevState, props) => ({
+                activePlayer: 1, 
+                playedTimesTwo: prevState.playedTimesTwo + 1          
+            }));
         }
     }
 
@@ -49,6 +53,7 @@ class GameAdmin extends React.Component {
                     textPlayingNow={this.textPlayingNow} 
                     textPlay={this.textPlay}
                     buttonHandler={this.playerClicked}
+                    playedTimes={this.state.playedTimesOne}
                 />
                 <PlayerTwo 
                     name={this.state.playerTwoName}  
@@ -56,6 +61,7 @@ class GameAdmin extends React.Component {
                     textPlayingNow={this.textPlayingNow}
                     textPlay={this.textPlay}
                     buttonHandler={this.playerClicked}
+                    playedTimes={this.state.playedTimesTwo}
                 />
                 <p>Set name of Player One: <input name="inputOne" onChange={(event) => this.nameChanged(event, 1)} /></p>
                 <p>Set name of Player Two: <input name="inputTwo" onChange={(event) => this.nameChanged(event, 2)} /></p>
