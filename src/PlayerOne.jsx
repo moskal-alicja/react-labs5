@@ -5,6 +5,17 @@ class PlayerOne extends React.Component {
     constructor(props) {
         super(props);
         this.state = { }
+
+        this.setTextForButton = this.setTextForButton.bind(this);
+    }
+
+    setTextForButton() {
+        if(this.props.active == 1) {
+            return this.props.textPlay;
+        }
+        else {
+            return this.props.textPlayingNow;
+        }
     }
 
     render() {
@@ -13,7 +24,7 @@ class PlayerOne extends React.Component {
                 <b>Player One</b>
                 <div>Name: {this.props.name}</div>
                 <div>Played number of times: </div>
-                <button>Play</button>
+                <button disabled={this.props.active != 1} onClick={(event) => this.props.buttonHandler(event, 1)}>{this.setTextForButton()}</button>
             </div>
         );
     }
